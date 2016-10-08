@@ -1,33 +1,32 @@
 package es.upm.miw.SVC.apaw.pd.tielinjiang.singleton.factory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
-import org.junit.Before;
 import org.junit.Test;
 
+
 public class ReferencesFactoryTest {
-    private ReferencesFactory factory;
-
-    @Before
-    public void before() {
-        factory = new ReferencesFactory();
-        factory.getReference("cero");
-    }
 
     @Test
-    public void testGetReferenceNew() {
-        assertEquals(1, factory.getReference("uno"));
-    }
-
-    @Test
-    public void testGetReference() {
-        assertEquals(0, factory.getReference("cero"));
+    public void testIsReferencesFactorySingleton() {
+        assertSame(ReferencesFactory.getInstance(), ReferencesFactory.getInstance());
     }
     
     @Test
-    public void testRemoveReference() {
-        factory.removeReference("cero");
-        assertEquals(1, factory.getReference("cero"));
+    public void testReferencesFactorySingletonNotNull() {
+        assertNotNull(ReferencesFactory.getInstance());
     }
+    
+    @Test
+    public void testReferencesFactory() {
+        ReferencesFactory.getInstance().getReference("cero");
+        assertEquals(0, ReferencesFactory.getInstance().getReference("cero"));
+        assertEquals(1, ReferencesFactory.getInstance().getReference("uno"));
+        ReferencesFactory.getInstance().removeReference("cero");
+        assertEquals(2, ReferencesFactory.getInstance().getReference("cero"));
+    }
+    
 
 }
