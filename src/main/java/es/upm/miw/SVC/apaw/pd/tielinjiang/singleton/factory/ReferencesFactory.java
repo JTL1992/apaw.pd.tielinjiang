@@ -5,12 +5,16 @@ import java.util.Map;
 
 public class ReferencesFactory {
     private Map<String, Integer> references;
-
+    private static ReferencesFactory rf = new ReferencesFactory();
     private int reference;
 
-    public ReferencesFactory() {
+    private ReferencesFactory() {
         this.references = new HashMap<>();
         this.reference = 0;
+    }
+
+    public static ReferencesFactory getInstance() {
+        return ReferencesFactory.rf;
     }
 
     public int getReference(String key) {
